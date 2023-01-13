@@ -44,3 +44,36 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
+
+
+*Welcome to the NewsCorp Front-End Coding Challenge***
+
+***The challenge***
+
+Using your front-end skills, complete this front-end component that takes a JSON feed (simulated from our Content API (CAPI) data) and render a list of news articles.
+
+**We want you to approach this challenge in the below order:**
+
+* Scaffold a new project. e.g. create-react-app
+* Add a headline, date, standfirst, thumbnail and link (canonical) for each story in the list
+* Commit your changes to GIT (regular commits whilst developing is preferred.)
+* Implement pagination
+* Add some basic css to make it viewable.
+
+If time permits:
+
+* Add in unit testing
+* Clean up the design
+
+**Hints**
+
+* Most of the data listed above is named accordingly in the json feed. 
+* Thumbnail images are trickier and contain a reference id (related.thumbnail.default[0]). 
+* This will need to be matched to the references object to get the image data and url (references.{id}.link.media)
+
+**Rules**
+
+You can research throughout the challenge
+You can implement any framework/library/dependencies you feel are necessary. React is preferred.
+
+Good luck!
