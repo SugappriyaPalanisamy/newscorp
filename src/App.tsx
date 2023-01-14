@@ -1,9 +1,18 @@
 import React, { useEffect, useState } from "react";
 import "./App.scss";
 import { NewsFeed } from "./model/app.model";
+import Articles from "./components/articles";
+import Pagination from "./components/pagination";
 
 function App() {
   const [data, setData] = useState<NewsFeed[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recordsPerPage] = useState(4);
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  const currentRecords = data.slice(indexOfFirstRecord, indexOfLastRecord);
+  const noOfPages = Math.ceil(data.length / recordsPerPage);
+
   //Fetching the data from json
   const getData = () => {
     fetch("data/capi.json", {
@@ -21,7 +30,7 @@ function App() {
           return {
             id: item.id,
             headline: item.headline.default,
-            date: item.date.updated,
+            date: item.date.created,
             standfirst: item.standfirst.default,
             canonicalLink: item.link.canonical,
             thumbnail: item.references[item.related.thumbnail.default[0]]
@@ -35,23 +44,15 @@ function App() {
 
   return (
     <div className="app-container">
-      {data.map(item => (
-        <div key={item.id} className="news-feed">
-          <span className="title">{item.headline}</span>
-          <span>
-            <img
-              width={item.thumbnail.width}
-              height={item.thumbnail.height}
-              src={item.thumbnail.link.media}
-              alt="African Buffalo "
-            />
-          </span>
-          <span
-            className="standfirst"
-            dangerouslySetInnerHTML={{ __html: item.standfirst }}
-          />
-        </div>
-      ))}
+      <h1>News</h1>
+      <div className="news-feed-wrapper">
+        <Articles data={currentRecords} />
+      </div>
+      <Pagination
+        noOfPages={noOfPages}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 }
