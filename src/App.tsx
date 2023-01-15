@@ -25,7 +25,7 @@ function App() {
         return response.json();
       })
       .then(function(responseData) {
-        //mapping only needed values
+        //mapping required values
         const items: NewsFeed[] = responseData.results.map((item: any) => {
           return {
             id: item.id,
